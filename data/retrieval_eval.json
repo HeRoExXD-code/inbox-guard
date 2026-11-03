@@ -1,0 +1,325 @@
+{
+ "_note": "Hand-labelled retrieval queries over inbox.json + retrieval_extra_emails.json. type = keyword | question | paraphrase (no shared words) | thai.",
+ "queries": [
+  {
+   "id": "r01",
+   "query": "project meeting",
+   "relevant": [
+    "e1"
+   ],
+   "type": "keyword"
+  },
+  {
+   "id": "r02",
+   "query": "final exam",
+   "relevant": [
+    "e2"
+   ],
+   "type": "keyword"
+  },
+  {
+   "id": "r03",
+   "query": "verification code",
+   "relevant": [
+    "e3"
+   ],
+   "type": "keyword"
+  },
+  {
+   "id": "r04",
+   "query": "slides",
+   "relevant": [
+    "e4"
+   ],
+   "type": "keyword"
+  },
+  {
+   "id": "r05",
+   "query": "library late fee",
+   "relevant": [
+    "e5"
+   ],
+   "type": "keyword"
+  },
+  {
+   "id": "r06",
+   "query": "wifi maintenance",
+   "relevant": [
+    "e6"
+   ],
+   "type": "keyword"
+  },
+  {
+   "id": "r07",
+   "query": "scholarship deadline",
+   "relevant": [
+    "e7"
+   ],
+   "type": "keyword"
+  },
+  {
+   "id": "r08",
+   "query": "api key",
+   "relevant": [
+    "e8"
+   ],
+   "type": "keyword"
+  },
+  {
+   "id": "r09",
+   "query": "badminton session",
+   "relevant": [
+    "e9"
+   ],
+   "type": "keyword"
+  },
+  {
+   "id": "r10",
+   "query": "newsletter",
+   "relevant": [
+    "e10"
+   ],
+   "type": "keyword"
+  },
+  {
+   "id": "r11",
+   "query": "homework extension",
+   "relevant": [
+    "e15"
+   ],
+   "type": "keyword"
+  },
+  {
+   "id": "r12",
+   "query": "hackathon registration",
+   "relevant": [
+    "e17"
+   ],
+   "type": "keyword"
+  },
+  {
+   "id": "r13",
+   "query": "career fair date",
+   "relevant": [
+    "e22"
+   ],
+   "type": "keyword"
+  },
+  {
+   "id": "r14",
+   "query": "badminton club fee",
+   "relevant": [
+    "e30"
+   ],
+   "type": "keyword"
+  },
+  {
+   "id": "r15",
+   "query": "When is my next project meeting with Dr. Somchai?",
+   "relevant": [
+    "e1"
+   ],
+   "type": "question"
+  },
+  {
+   "id": "r16",
+   "query": "When is the CS301 final exam and where?",
+   "relevant": [
+    "e2"
+   ],
+   "type": "question"
+  },
+  {
+   "id": "r17",
+   "query": "What is my GitHub verification code?",
+   "relevant": [
+    "e3"
+   ],
+   "type": "question"
+  },
+  {
+   "id": "r18",
+   "query": "Did Mint ask me for anything?",
+   "relevant": [
+    "e4"
+   ],
+   "type": "question"
+  },
+  {
+   "id": "r19",
+   "query": "How much is the late fee for my library book?",
+   "relevant": [
+    "e5"
+   ],
+   "type": "question"
+  },
+  {
+   "id": "r20",
+   "query": "Is there any Wi-Fi maintenance coming up?",
+   "relevant": [
+    "e6"
+   ],
+   "type": "question"
+  },
+  {
+   "id": "r21",
+   "query": "What is the deadline for the scholarship application?",
+   "relevant": [
+    "e7"
+   ],
+   "type": "question"
+  },
+  {
+   "id": "r22",
+   "query": "Which API key was created for my capstone project?",
+   "relevant": [
+    "e8"
+   ],
+   "type": "question"
+  },
+  {
+   "id": "r23",
+   "query": "What time is badminton this week?",
+   "relevant": [
+    "e9"
+   ],
+   "type": "question"
+  },
+  {
+   "id": "r24",
+   "query": "Any news about small language models?",
+   "relevant": [
+    "e10"
+   ],
+   "type": "question"
+  },
+  {
+   "id": "r25",
+   "query": "What time does the cafeteria close?",
+   "relevant": [
+    "e11"
+   ],
+   "type": "question"
+  },
+  {
+   "id": "r26",
+   "query": "When is the dormitory fee due?",
+   "relevant": [
+    "e12"
+   ],
+   "type": "question"
+  },
+  {
+   "id": "r27",
+   "query": "When is my internship interview?",
+   "relevant": [
+    "e13"
+   ],
+   "type": "question"
+  },
+  {
+   "id": "r28",
+   "query": "Where is my USB hub order?",
+   "relevant": [
+    "e14"
+   ],
+   "type": "question"
+  },
+  {
+   "id": "r29",
+   "query": "What is the replacement fee for a lost student ID?",
+   "relevant": [
+    "e16"
+   ],
+   "type": "question"
+  },
+  {
+   "id": "r30",
+   "query": "When does my KMITL password expire?",
+   "relevant": [
+    "e28"
+   ],
+   "type": "question"
+  },
+  {
+   "id": "r31",
+   "query": "When do I have to return my borrowed book?",
+   "relevant": [
+    "e5"
+   ],
+   "type": "paraphrase"
+  },
+  {
+   "id": "r32",
+   "query": "Who is waiting for my presentation?",
+   "relevant": [
+    "e4"
+   ],
+   "type": "paraphrase"
+  },
+  {
+   "id": "r33",
+   "query": "Where do I sit my test?",
+   "relevant": [
+    "e2"
+   ],
+   "type": "paraphrase"
+  },
+  {
+   "id": "r34",
+   "query": "Is the internet going to be down?",
+   "relevant": [
+    "e6"
+   ],
+   "type": "paraphrase"
+  },
+  {
+   "id": "r35",
+   "query": "Is there any money available for students?",
+   "relevant": [
+    "e7"
+   ],
+   "type": "paraphrase"
+  },
+  {
+   "id": "r36",
+   "query": "Did anyone send me a security passcode?",
+   "relevant": [
+    "e3"
+   ],
+   "type": "paraphrase"
+  },
+  {
+   "id": "r37",
+   "query": "ตารางสอบปลายภาค",
+   "relevant": [
+    "e2"
+   ],
+   "type": "thai"
+  },
+  {
+   "id": "r38",
+   "query": "ค่าปรับหนังสือห้องสมุด",
+   "relevant": [
+    "e5"
+   ],
+   "type": "thai"
+  },
+  {
+   "id": "r39",
+   "query": "ประชุมโปรเจกต์",
+   "relevant": [
+    "e1"
+   ],
+   "type": "thai"
+  },
+  {
+   "id": "r40",
+   "query": "ทุน scholarship",
+   "relevant": [
+    "e7"
+   ],
+   "type": "thai"
+  }
+ ]
+}

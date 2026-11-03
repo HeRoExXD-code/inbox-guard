@@ -1,0 +1,119 @@
+{
+  "naive_substring (baseline)": {
+    "overall": {
+      "n": 40,
+      "hit1": 0.35,
+      "recall3": 0.5,
+      "mrr": 0.484,
+      "avg_results": 14.2
+    },
+    "by_type": {
+      "keyword": {
+        "n": 14,
+        "hit1": 0.857,
+        "recall3": 0.929,
+        "mrr": 0.911,
+        "avg_results": 2.4
+      },
+      "question": {
+        "n": 16,
+        "hit1": 0.062,
+        "recall3": 0.25,
+        "mrr": 0.252,
+        "avg_results": 22.5
+      },
+      "paraphrase": {
+        "n": 6,
+        "hit1": 0.0,
+        "recall3": 0.333,
+        "mrr": 0.265,
+        "avg_results": 28.7
+      },
+      "thai": {
+        "n": 4,
+        "hit1": 0.25,
+        "recall3": 0.25,
+        "mrr": 0.25,
+        "avg_results": 0.2
+      }
+    }
+  },
+  "bm25_no_stopwords (ablation)": {
+    "overall": {
+      "n": 40,
+      "hit1": 0.85,
+      "recall3": 0.875,
+      "mrr": 0.868,
+      "avg_results": 3.3
+    },
+    "by_type": {
+      "keyword": {
+        "n": 14,
+        "hit1": 1.0,
+        "recall3": 1.0,
+        "mrr": 1.0,
+        "avg_results": 1.9
+      },
+      "question": {
+        "n": 16,
+        "hit1": 1.0,
+        "recall3": 1.0,
+        "mrr": 1.0,
+        "avg_results": 5
+      },
+      "paraphrase": {
+        "n": 6,
+        "hit1": 0.5,
+        "recall3": 0.667,
+        "mrr": 0.617,
+        "avg_results": 4.2
+      },
+      "thai": {
+        "n": 4,
+        "hit1": 0.25,
+        "recall3": 0.25,
+        "mrr": 0.25,
+        "avg_results": 0.2
+      }
+    }
+  },
+  "bm25 (used by the agent)": {
+    "overall": {
+      "n": 40,
+      "hit1": 0.8,
+      "recall3": 0.8,
+      "mrr": 0.805,
+      "avg_results": 2.0
+    },
+    "by_type": {
+      "keyword": {
+        "n": 14,
+        "hit1": 1.0,
+        "recall3": 1.0,
+        "mrr": 1.0,
+        "avg_results": 1.9
+      },
+      "question": {
+        "n": 16,
+        "hit1": 1.0,
+        "recall3": 1.0,
+        "mrr": 1.0,
+        "avg_results": 3
+      },
+      "paraphrase": {
+        "n": 6,
+        "hit1": 0.167,
+        "recall3": 0.167,
+        "mrr": 0.2,
+        "avg_results": 1.2
+      },
+      "thai": {
+        "n": 4,
+        "hit1": 0.25,
+        "recall3": 0.25,
+        "mrr": 0.25,
+        "avg_results": 0.2
+      }
+    }
+  }
+}

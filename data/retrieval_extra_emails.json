@@ -1,0 +1,165 @@
+{
+ "_note": "Extra distractor emails for the retrieval evaluation only (the agent's inbox stays at 10 emails). Synthetic.",
+ "emails": [
+  {
+   "id": "e11",
+   "date": "2026-10-25",
+   "from": "cafeteria@kmitl.ac.th",
+   "to": "student@kmitl.ac.th",
+   "subject": "Cafeteria menu change",
+   "body": "From Monday the Building E cafeteria will close at 15:00. A new vegetarian menu is available."
+  },
+  {
+   "id": "e12",
+   "date": "2026-10-25",
+   "from": "dorm@kmitl.ac.th",
+   "to": "student@kmitl.ac.th",
+   "subject": "Dormitory fee payment",
+   "body": "The dormitory fee for semester 2 is due on 20 November 2026. Pay at the finance office or by QR code."
+  },
+  {
+   "id": "e13",
+   "date": "2026-10-27",
+   "from": "hr.internship@techcorp.example",
+   "to": "student@kmitl.ac.th",
+   "subject": "Internship interview invitation",
+   "body": "We would like to invite you to an interview for the machine learning internship on 10 November 2026 at 10:30 via Zoom."
+  },
+  {
+   "id": "e14",
+   "date": "2026-10-28",
+   "from": "noreply@shop-orders.example",
+   "to": "student@kmitl.ac.th",
+   "subject": "Your order has shipped",
+   "body": "Your order #88213 (USB-C hub) has shipped and will arrive within 3 days. Tracking number TH88213."
+  },
+  {
+   "id": "e15",
+   "date": "2026-10-29",
+   "from": "prof.anan@kmitl.ac.th",
+   "to": "student@kmitl.ac.th",
+   "subject": "Homework 4 extension",
+   "body": "Homework 4 for the Databases course is extended until 9 November 2026 at 23:59."
+  },
+  {
+   "id": "e16",
+   "date": "2026-10-30",
+   "from": "student.affairs@kmitl.ac.th",
+   "to": "student@kmitl.ac.th",
+   "subject": "Student ID card replacement",
+   "body": "Lost student ID cards can be replaced at the Building 1 counter for 100 baht. Bring a copy of your national ID."
+  },
+  {
+   "id": "e17",
+   "date": "2026-10-30",
+   "from": "hackathon@kmitl.ac.th",
+   "to": "student@kmitl.ac.th",
+   "subject": "AI Hackathon registration",
+   "body": "Register your team for the campus AI Hackathon by 12 November 2026. Teams of 3-4, prizes up to 20,000 baht."
+  },
+  {
+   "id": "e18",
+   "date": "2026-10-31",
+   "from": "noreply@zoom.example",
+   "to": "student@kmitl.ac.th",
+   "subject": "Meeting recording available",
+   "body": "The recording of 'Capstone office hours' is now available."
+  },
+  {
+   "id": "e19",
+   "date": "2026-11-01",
+   "from": "mom@family.example",
+   "to": "student@kmitl.ac.th",
+   "subject": "Dinner on Sunday",
+   "body": "Are you coming home for dinner on Sunday? Dad is making tom yum."
+  },
+  {
+   "id": "e20",
+   "date": "2026-11-01",
+   "from": "bank@bank-alerts.example",
+   "to": "student@kmitl.ac.th",
+   "subject": "Statement ready",
+   "body": "Your October e-statement is ready to download in the mobile app."
+  },
+  {
+   "id": "e21",
+   "date": "2026-11-02",
+   "from": "gym@kmitl.ac.th",
+   "to": "student@kmitl.ac.th",
+   "subject": "Fitness center closed",
+   "body": "The fitness center is closed on 11 November 2026 for cleaning."
+  },
+  {
+   "id": "e22",
+   "date": "2026-11-02",
+   "from": "career@kmitl.ac.th",
+   "to": "student@kmitl.ac.th",
+   "subject": "Career fair 2026",
+   "body": "The annual career fair takes place on 25 November 2026 in the main hall. Bring printed resumes."
+  },
+  {
+   "id": "e23",
+   "date": "2026-11-02",
+   "from": "shuttle@kmitl.ac.th",
+   "to": "student@kmitl.ac.th",
+   "subject": "Shuttle bus schedule update",
+   "body": "The campus shuttle will run every 15 minutes between 07:00 and 09:00 starting 9 November."
+  },
+  {
+   "id": "e24",
+   "date": "2026-11-03",
+   "from": "prof.nipa@kmitl.ac.th",
+   "to": "student@kmitl.ac.th",
+   "subject": "Quiz 2 results",
+   "body": "Quiz 2 scores for Linear Algebra are posted on the course page. The average score was 14 out of 20."
+  },
+  {
+   "id": "e25",
+   "date": "2026-11-03",
+   "from": "noreply@github.com",
+   "to": "student@kmitl.ac.th",
+   "subject": "[GitHub] A new SSH key was added",
+   "body": "A new SSH key was added to your account. If this was not you, remove it in settings."
+  },
+  {
+   "id": "e26",
+   "date": "2026-11-03",
+   "from": "research@kmitl.ac.th",
+   "to": "student@kmitl.ac.th",
+   "subject": "Research assistant opening",
+   "body": "The NLP lab is hiring a part-time research assistant for Thai language models. Apply by 30 November 2026."
+  },
+  {
+   "id": "e27",
+   "date": "2026-11-03",
+   "from": "noreply@music-app.example",
+   "to": "student@kmitl.ac.th",
+   "subject": "Your yearly recap is here",
+   "body": "See your top songs of the year."
+  },
+  {
+   "id": "e28",
+   "date": "2026-11-03",
+   "from": "it-support@kmitl.ac.th",
+   "to": "student@kmitl.ac.th",
+   "subject": "Password expires soon",
+   "body": "Your KMITL account password expires in 7 days. Change it at the IT portal."
+  },
+  {
+   "id": "e29",
+   "date": "2026-11-03",
+   "from": "library@kmitl.ac.th",
+   "to": "student@kmitl.ac.th",
+   "subject": "Study room booking confirmed",
+   "body": "Your booking for study room 3 on 6 November 2026 from 13:00 to 15:00 is confirmed."
+  },
+  {
+   "id": "e30",
+   "date": "2026-11-03",
+   "from": "club.treasurer@kmitl.ac.th",
+   "to": "student@kmitl.ac.th",
+   "subject": "Club membership fee",
+   "body": "The annual badminton club fee is 200 baht, payable by 15 November."
+  }
+ ]
+}
