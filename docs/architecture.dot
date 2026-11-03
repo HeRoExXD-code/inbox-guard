@@ -1,0 +1,28 @@
+digraph G {
+  rankdir=LR; fontname="Helvetica"; nodesep=0.35; ranksep=0.5;
+  node [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=11, fillcolor="#F4F6FA", color="#6B7A99"];
+  edge [fontname="Helvetica", fontsize=9, color="#6B7A99"];
+
+  user  [label="User message\n(CLI or FastAPI /run, /stream SSE)", fillcolor="#E6F0FF"];
+  agent [label="Agent loop\nmax 8 steps, stop on final answer\nor repeated invalid replies"];
+  llm   [label="LLM via class proxy\nOpenAI() + gemma-4-E4B-it\ntemperature 0", fillcolor="#FFF4E0"];
+  parse [label="Parse + validate reply\nPydantic, extra=forbid\nrepair prompt on failure"];
+  allow [label="Tool allow-list +\nargument schemas"];
+  guard [label="Defence layer\n(none | spotlight | guard)\nintent gate, recipient allow-list,\nsecret/link egress filter", fillcolor="#FDE8E8", color="#C0504D"];
+  env   [label="Simulated inbox + calendar\nsearch_emails = BM25\n(outbox, calendar, deleted)", fillcolor="#E8F5E9"];
+  wrap  [label="Wrap untrusted email text\n<untrusted-xxxxxxxx>...</untrusted-xxxxxxxx>", fillcolor="#FDE8E8", color="#C0504D"];
+  ans   [label="Final answer\n(untrusted links removed by guard)", fillcolor="#E6F0FF"];
+  eval  [label="Evaluation\n31 agent cases x 3 defences\n40 retrieval queries x 3 searchers\nutility, ASR, Hit@1, Recall@3, MRR", shape=note, fillcolor="#FFFBE6"];
+
+  user -> agent;
+  agent -> llm [label="messages"];
+  llm -> parse [label="raw text"];
+  parse -> allow [label="valid action"];
+  allow -> guard [label="valid args"];
+  guard -> env [label="allowed", color="#2E7D32"];
+  guard -> agent [label="BLOCKED message", color="#C0504D", fontcolor="#C0504D", constraint=false];
+  env -> wrap [label="email text"];
+  wrap -> agent [label="observation"];
+  agent -> ans;
+  eval -> agent [style=dashed, label="drives", constraint=false];
+}
