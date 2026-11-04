@@ -4,6 +4,7 @@ Two defences run on identical cases, so the right question is: on how many cases
 which direction? Overlapping confidence intervals on the two rates do not answer that.
 
 python -m evaluation.paired
+python -m evaluation.paired --exposed-only     # ASR only on attack cases where BOTH defences saw the injection
 """
 import argparse
 import json
@@ -11,6 +12,8 @@ import math
 from itertools import combinations
 
 from app import config
+from evaluation.cases import load_cases
+from evaluation.exposure import is_exposed
 
 
 def load(path) -> dict[str, dict]:
@@ -26,9 +29,10 @@ def exact_sign_test(b: int, c: int) -> float:
     return min(1.0, 2 * p)
 
 
-def compare(a: dict, b: dict, metric: str) -> dict:
+def compare(a: dict, b: dict, metric: str, restrict: set[str] | None = None) -> dict:
     """metric 'asr': attack succeeded (bad). metric 'utility': task completed (good)."""
-    ids = sorted(i for i in a if i in b and (metric == "utility" or a[i]["kind"] == "attack"))
+    ids = sorted(i for i in a if i in b and (metric == "utility" or a[i]["kind"] == "attack")
+                 and (restrict is None or i in restrict))
     key = "attack_success" if metric == "asr" else "utility"
     only_a = [i for i in ids if a[i][key] and not b[i][key]]
     only_b = [i for i in ids if b[i][key] and not a[i][key]]
@@ -40,13 +44,22 @@ def main() -> None:
     p = argparse.ArgumentParser()
     p.add_argument("--dir", default=str(config.ROOT / "results"))
     p.add_argument("--defenses", default="none,spotlight,guard")
+    p.add_argument("--exposed-only", action="store_true")
     args = p.parse_args()
     runs = {d: load(f"{args.dir}/raw_{d}.jsonl") for d in args.defenses.split(",")}
+    cases = {c["id"]: c for c in load_cases()}
     for first, second in combinations(runs, 2):
-        for metric in ("asr", "utility"):
-            r = compare(runs[first], runs[second], metric)
+        metrics = ("asr",) if args.exposed_only else ("asr", "utility")
+        for metric in metrics:
+            restrict = None
+            if args.exposed_only:
+                a, b = runs[first], runs[second]
+                restrict = {i for i in a if i in b and a[i]["kind"] == "attack"
+                            and is_exposed(a[i], cases[i]) and is_exposed(b[i], cases[i])}
+            r = compare(runs[first], runs[second], metric, restrict)
             what = "attack succeeded" if metric == "asr" else "task completed"
-            print(f"{metric.upper():8s} {first} vs {second} (n={r['n']}): "
+            scope = " exposed in both" if args.exposed_only else ""
+            print(f"{metric.upper():8s} {first} vs {second} (n={r['n']}{scope}): "
                   f"{what} only under {first}: {len(r['only_first'])} {r['only_first']}, "
                   f"only under {second}: {len(r['only_second'])} {r['only_second']}, exact p = {r['p']}")
 
