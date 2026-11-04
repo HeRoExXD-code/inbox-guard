@@ -20,8 +20,10 @@ def test_home_page_serves_the_ui():
 def test_run_flags_a_hijack_without_defence(monkeypatch):
     monkeypatch.setattr(llm, "chat", scripted(STEAL, FINAL))
     r = client.post("/run", json={"message": "What is new?", "defense": "none"}).json()
-    texts = " ".join(f["text"] for f in r["world"]["flags"])
-    assert "did not ask" in texts and "not one of your contacts" in texts and "secret" in texts
+    flags = r["world"]["flags"]
+    assert len(flags) == 1  # one warning per side effect, all reasons in it
+    text = flags[0]["text"]
+    assert "x@evil.example" in text and "did not ask" in text and "not one of your contacts" in text and "secret" in text
 
 
 def test_run_with_guard_blocks_and_has_no_flags(monkeypatch):
