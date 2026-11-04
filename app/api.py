@@ -1,21 +1,28 @@
-"""FastAPI backend.  Run: uvicorn app.api:app --reload   (docs at /docs)"""
+"""FastAPI backend + web UI.
+
+uvicorn app.api:app --reload      then open http://127.0.0.1:8000  (API docs at /docs)
+"""
 import json
+from pathlib import Path
 from typing import Literal
 
-from fastapi import FastAPI
-from fastapi.responses import StreamingResponse
+from fastapi import FastAPI, HTTPException
+from fastapi.responses import FileResponse, StreamingResponse
 from pydantic import BaseModel, Field
 
 from .agent import run_agent, run_agent_iter
+from .assess import assess
 from .defenses import DEFENSES
 from .environment import InboxEnv
+
+STATIC = Path(__file__).resolve().parent / "static"
 
 app = FastAPI(title="InboxGuard", description="Prompt-injection-resistant email agent")
 
 
 class ExtraEmail(BaseModel):
     sender: str = Field(default="someone@external.example", max_length=200)
-    subject: str = Field(max_length=200)
+    subject: str = Field(default="(no subject)", max_length=200)
     body: str = Field(max_length=4000)
 
 
@@ -34,8 +41,14 @@ def _make_env(req: RunRequest) -> InboxEnv:
     return env
 
 
-def _world(env: InboxEnv) -> dict:
-    return {"outbox": env.outbox, "calendar": env.calendar, "deleted": env.deleted}
+def _world(env: InboxEnv, message: str, answer: str | None) -> dict:
+    return {"outbox": env.outbox, "calendar": env.calendar, "deleted": env.deleted,
+            "flags": assess(env, message, answer)}
+
+
+@app.get("/", include_in_schema=False)
+def home() -> FileResponse:
+    return FileResponse(STATIC / "index.html")
 
 
 @app.get("/health")
@@ -52,9 +65,12 @@ def inbox() -> dict:
 @app.post("/run")
 def run(req: RunRequest) -> dict:
     env = _make_env(req)
-    trace = run_agent(req.message, env, DEFENSES[req.defense])
+    try:
+        trace = run_agent(req.message, env, DEFENSES[req.defense])
+    except Exception as exc:  # e.g. proxy unreachable or key missing
+        raise HTTPException(status_code=502, detail=f"The model could not be reached: {exc}") from None
     return {"answer": trace.answer, "stop_reason": trace.stop_reason, "steps": trace.steps,
-            "blocked": trace.blocked, "events": trace.events, "world": _world(env)}
+            "blocked": trace.blocked, "events": trace.events, "world": _world(env, req.message, trace.answer)}
 
 
 @app.post("/stream")
@@ -63,11 +79,14 @@ def stream(req: RunRequest) -> StreamingResponse:
     env = _make_env(req)
 
     def gen():
+        answer = None
         try:
             for ev in run_agent_iter(req.message, env, DEFENSES[req.defense]):
+                if ev["type"] == "final":
+                    answer = ev["answer"]
                 yield f"data: {json.dumps(ev, ensure_ascii=False)}\n\n"
         except Exception as exc:  # e.g. proxy unreachable
-            yield f"data: {json.dumps({'type': 'error', 'error': str(exc)})}\n\n"
-        yield f"data: {json.dumps({'type': 'world', **_world(env)}, ensure_ascii=False)}\n\n"
+            yield f"data: {json.dumps({'type': 'error', 'error': f'The model could not be reached: {exc}'})}\n\n"
+        yield f"data: {json.dumps({'type': 'world', **_world(env, req.message, answer)}, ensure_ascii=False)}\n\n"
 
     return StreamingResponse(gen(), media_type="text/event-stream")
