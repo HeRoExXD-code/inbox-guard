@@ -21,6 +21,9 @@ app = FastAPI(title="InboxGuard", description="Prompt-injection-resistant email 
 
 
 class ExtraEmail(BaseModel):
+    mode: Literal["new_email", "append"] = Field(
+        default="new_email", description="new_email: a new email from a stranger. append: hide body at the end of target")
+    target: str | None = Field(default=None, pattern=r"^e\d{1,4}$", description="email id for mode=append, e.g. e6")
     sender: str = Field(default="someone@external.example", max_length=200)
     subject: str = Field(default="(no subject)", max_length=200)
     body: str = Field(max_length=4000)
@@ -35,9 +38,14 @@ class RunRequest(BaseModel):
 
 def _make_env(req: RunRequest) -> InboxEnv:
     env = InboxEnv.load()  # fresh inbox per request
-    if req.extra_email:
-        env.inject({"mode": "new_email", "from": req.extra_email.sender,
-                    "subject": req.extra_email.subject, "body": req.extra_email.body})
+    x = req.extra_email
+    if x and x.mode == "append":
+        try:
+            env.inject({"mode": "append", "target": x.target or "e1", "text": x.body})
+        except ValueError:
+            raise HTTPException(status_code=422, detail=f"There is no email {x.target} in the inbox.") from None
+    elif x:
+        env.inject({"mode": "new_email", "from": x.sender, "subject": x.subject, "body": x.body})
     return env
 
 
